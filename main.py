@@ -54,8 +54,7 @@ class ListClass(Resource):
     return {'len': str(len(allarray)), 'array': allarray}
   
 # модель данные с двумя параметрами строкового типа
-minmax = api.model('minmax', {'min':fields.String, 'max':fields.String}, required=True, description='two
-values')
+minmax = api.model('minmax', {'min':fields.String, 'max':fields.String}, required=True, description='two values')
 # url 127.0.0.1/list/mimmax
 @name_space1.route("/minmax")
 class MinMaxClass(Resource):
