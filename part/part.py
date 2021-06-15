@@ -1,5 +1,4 @@
 from flask_restplus import Namespace, Resource, fields
-
 api = Namespace('part', description='some information')
 # описание возвращаемых полей
 info = api.model('part', {
