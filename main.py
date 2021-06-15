@@ -67,4 +67,4 @@ class MinMaxClass(Resource):
     return {'min': min(allarray), 'max': max(allarray)}
 api.add_namespace(name_space1)
 
-app.run(debug=True,host='127.0.0.1',port=5000)
+app.run(debug=True,host='82.148.24.170',port=5000)
