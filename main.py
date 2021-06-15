@@ -67,4 +67,26 @@ class MinMaxClass(Resource):
     return {'min': min(allarray), 'max': max(allarray)}
 api.add_namespace(name_space1)
 
+from flask_restplus import reqparse
+from random import random
+reqp = reqparse.RequestParser()
+# добавление аргументов передаваемых запросом GET
+# например GET http://127.0.0.1:5000/list/makerand?len=7&minval=1&maxval=12
+reqp.add_argument('len', type=int, required=False)
+reqp.add_argument('minval', type=float, required=False)
+reqp.add_argument('maxval', type=float, required=False)
+
+
+@name_space1.route("/makerand")
+class MakeArrayClass(Resource):
+  @name_space1.doc("")
+  # маршаллинг данных в соответствии с моделью minmax
+  @name_space1.expect(reqp)
+  @name_space1.marshal_with(list_)
+  def get(self):
+    """Возвращение массива случайных значений от min до max"""
+    args = reqp.parse_args()
+    array = [random()*(args['maxval']-args['minval'])+args['minval'] for i in range(args['len'])]
+    return {'len': args['len'], 'array': array}
+
 app.run(debug=True,host='82.148.24.170',port=5000)
